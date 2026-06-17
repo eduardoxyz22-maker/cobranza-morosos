@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cobranza — Multiespumas</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNUOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.js" integrity="sha384-iU8HYtnGQ8Cy4zl7gbNMOhsDTTKX02BTXptVP/vqAWIaTfM7isw76iyZCsjL2eVi" crossorigin="anonymous"></script>
 <style>
 :root{color-scheme:light;--red:#ef4444;--red-light:#fef2f2;--red-border:#fecaca;--orange:#f97316;--orange-light:#fff7ed;--orange-border:#fed7aa;--yellow:#eab308;--yellow-light:#fefce8;--yellow-border:#fef08a;--green:#22c55e;--green-light:#f0fdf4;--green-border:#bbf7d0;--blue:#3b82f6;--blue-light:#eff6ff;--gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -272,7 +272,7 @@ function renderTable(){
   const filtered = searchTerm ? CLIENTES.filter(matchesSearch) : CLIENTES;
   const sorted = [...filtered].sort((a,b)=>{
     if(currentSort==='amount') return b.adeudado-a.adeudado;
-    if(currentSort==='days'){const da=a.maxDays??-1,db=b.maxDays?/-1;return db-da;}
+    if(currentSort==='days'){const da=a.maxDays??-1,db=b.maxDays??-1;return db-da;}
     return a.nombre.localeCompare(b.nombre);
   });
   const container = document.getElementById('client-list');

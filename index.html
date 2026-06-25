@@ -56,7 +56,7 @@ body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--
 .ct-row:hover{background:var(--gray-50);}.ct-row:last-child{border-bottom:none;}
 .client-info{display:flex;align-items:center;gap:10px;}
 .avatar{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;flex-shrink:0;}
-.av-red{background:linear-gradient(135deg,#ef4444,#dc2626);}.av-orange{background:linear-gradient(135deg,#f97316,#ea580c);}.av-yellow{background:linear-gradient(135deg,#eab308,#ca8a04);}.av-blue{background:linear-gradient(135deg,#3b82f6,#2563eb);}
+.av-red{background:linear-gradient(135deg,#ef4444,#dc2626);}.av-orange{background:linear-gradient(135deg,#f97316,#ea580c);}.av-yellow{background:linear-gradient(135deg,#eab308,#ca8a04);}.av-blue{background:linear-gradient(135deg,#3b82f6,#2563eb);}.av-green{background:linear-gradient(135deg,#22c55e,#16a34a);}
 .client-name{font-weight:700;font-size:13px;color:var(--gray-800);}.client-orders{font-size:11px;color:var(--gray-400);margin-top:1px;}
 .amount-wrap .amount-value{font-size:14px;font-weight:800;color:var(--gray-900);}.amount-wrap .amount-bar-bg{height:4px;background:var(--gray-100);border-radius:2px;margin-top:6px;}.amount-wrap .amount-bar{height:4px;border-radius:2px;background:linear-gradient(90deg,#3b82f6,#1d4ed8);}
 .days-badge{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700;white-space:nowrap;}
@@ -156,6 +156,18 @@ footer{text-align:center;padding:16px;font-size:11px;color:var(--gray-400);}
   </div>
 </div>
 
+<div class="main" style="padding-top:0;">
+  <div class="panel" style="margin-bottom:24px;">
+    <div class="panel-header" style="background:var(--green-light);border-bottom:1px solid var(--green-border);">
+      <span class="panel-title" style="color:#166534;">✅ Clientes que Pagaron este Período</span>
+      <span style="font-size:11px;color:#166534;font-weight:600;" id="pagados-count"></span>
+    </div>
+    <div class="ct-header">
+      <div>Cliente</div><div>Monto Cobrado</div><div>Estado</div><div>Detalle Facturas</div><div></div>
+    </div>
+    <div id="pagados-list"></div>
+  </div>
+</div>
 <footer>Datos extraídos de "Ventas por Cliente" · Actualizado el <span id="footer-date"></span></footer>
 
 <script>
@@ -366,6 +378,38 @@ aging.forEach(a=>{
   el.innerHTML=`<div class="aging-dot" style="background:${a.color}"></div><div class="aging-name">${a.label}</div><div class="aging-count">${a.clients.length} cliente${a.clients.length!==1?'s':''}</div><div class="aging-amount" style="color:${a.color}">${total?bs(total):'—'}</div>`;
   agingList.appendChild(el);
 });
+
+// ── SECCIÓN PAGADOS ──────────────────────────────────────────
+const PAGADOS = [
+  { nombre:"LUIS FRANCO", initials:"LF", color:"av-orange",
+    totalPagado:2610, ultimaFecha:"18/06/2026",
+    ordenes:[
+      {oc:"oc-1",fecha:"17/06/2026",factura:"578",qty:3,subtotal:2610,fecha_pago:"18/06/2026"},
+    ]
+  }
+];
+const pagadosContainer = document.getElementById('pagados-list');
+document.getElementById('pagados-count').textContent = PAGADOS.length+' clientes pagaron este periodo';
+if(PAGADOS.length===0){
+  pagadosContainer.innerHTML='<p style="padding:20px;text-align:center;color:var(--gray-400);font-size:13px;">Sin pagos registrados este periodo</p>';
+} else {
+  PAGADOS.forEach(c=>{
+    const wrap=document.createElement('div');
+    wrap.className='ct-row';
+    const fechaStr=c.ultimaFecha||'sin fecha';
+    const detalle=c.ordenes.map(o=>'Fact.'+o.factura+(o.fecha_pago?' ('+o.fecha_pago+')':'')).join(' | ');
+    wrap.innerHTML=
+      '<div class="client-info"><div class="avatar av-green">'+c.initials+'</div>'+
+      '<div><div class="client-name">'+c.nombre+'</div>'+
+      '<div class="client-orders">'+c.ordenes.length+' ordenes</div></div></div>'+
+      '<div class="amount-wrap"><div class="amount-value" style="color:#16a34a">Bs '+c.totalPagado.toLocaleString('es-BO')+'</div>'+
+      '<div style="font-size:10px;color:var(--gray-400);margin-top:4px;">Cobrado</div></div>'+
+      '<div><span class="days-badge" style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;">PAGADO '+fechaStr+'</span></div>'+
+      '<div style="font-size:11px;color:var(--gray-400);">'+detalle+'</div>'+
+      '<div></div>';
+    pagadosContainer.appendChild(wrap);
+  });
+}
 </script>
 </body>
 </html>

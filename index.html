@@ -85,7 +85,7 @@ footer{text-align:center;padding:16px;font-size:11px;color:var(--gray-400);}
   </div>
   <div class="topbar-right">
     <span class="topbar-date" id="topbar-date"></span>
-    <span class="topbar-badge" id="alert-count">7 deudores</span>
+    <span class="topbar-badge" id="alert-count">8 deudores</span>
   </div>
 </div>
 
@@ -93,7 +93,7 @@ footer{text-align:center;padding:16px;font-size:11px;color:var(--gray-400);}
   <div class="kpi-grid">
     <div class="kpi-card red">
       <div class="kpi-icon">💸</div>
-      <div class="kpi-value">Bs 333,229</div>
+      <div class="kpi-value">Bs 398,419</div>
       <div class="kpi-label">Total Adeudado</div>
       <div class="kpi-sub">Sin cobrar este período</div>
     </div>
@@ -105,7 +105,7 @@ footer{text-align:center;padding:16px;font-size:11px;color:var(--gray-400);}
     </div>
     <div class="kpi-card blue">
       <div class="kpi-icon">📦</div>
-      <div class="kpi-value">12</div>
+      <div class="kpi-value">18</div>
       <div class="kpi-label">Órdenes Pendientes</div>
       <div class="kpi-sub">Entregadas sin pago</div>
     </div>
@@ -168,15 +168,16 @@ function daysSince(dateStr){
 }
 const CLIENTES = [
   { id:"karina_t", nombre:"KARINA TORRICO", initials:"KT", color:"av-red",
-    adeudado:19166, pagado:0,
+    adeudado:21926, pagado:0,
     ordenes:[
       {oc:"oc-1-6",fecha:"03/06/2026",factura:"122",qty:7,subtotal:19166,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
+      {oc:"Oc-2",fecha:"19/06/2026",factura:"579",qty:2,subtotal:2760,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
     ]
   },
   { id:"copacaba", nombre:"COPACABA", initials:"C", color:"av-orange",
-    adeudado:40590, pagado:0,
+    adeudado:40590, pagado:21050,
     ordenes:[
-      {oc:"OP-01",fecha:"03/06/2026",factura:"474",qty:15,subtotal:21050,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
+      {oc:"OP-01",fecha:"03/06/2026",factura:"474",qty:15,subtotal:21050,estado:"ENTREGADO",pago:"NO",fecha_pago:"17/06/2026"},
       {oc:"op-02",fecha:"14/06/2026",factura:"556",qty:18,subtotal:19540,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
     ]
   },
@@ -191,6 +192,7 @@ const CLIENTES = [
     adeudado:87525, pagado:0,
     ordenes:[
       {oc:"OC-1",fecha:"10/06/2026",factura:"123",qty:65,subtotal:87525,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
+      {oc:"OC-2",fecha:"20/06/2026",factura:"—",qty:57,subtotal:64890,estado:"PENDIENTE",pago:"NO",fecha_pago:null},
     ]
   },
   { id:"camsa", nombre:"CAMSA", initials:"C", color:"av-red",
@@ -199,24 +201,33 @@ const CLIENTES = [
       {oc:"oc-1",fecha:"08/06/2026",factura:"116",qty:4,subtotal:6149,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
     ]
   },
-  { id:"otros", nombre:"OTROS", initials:"O", color:"av-blue",
-    adeudado:31500, pagado:0,
+  { id:"luis_fra", nombre:"LUIS FRANCO", initials:"LF", color:"av-orange",
+    adeudado:2610, pagado:2610,
     ordenes:[
-      {oc:"OC-1",fecha:"09/06/2026",factura:"119",qty:8,subtotal:14000,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
-      {oc:"OC-2",fecha:"03/06/2026",factura:"113",qty:10,subtotal:17500,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
-      {oc:"OC-3",fecha:"09/06/2026",factura:"493",qty:1,subtotal:590,estado:"ENTREGADO",pago:"SI",fecha_pago:null},
+      {oc:"oc-1",fecha:"17/06/2026",factura:"578",qty:3,subtotal:2610,estado:"ENTREGADO",pago:"NO",fecha_pago:"18/06/2026"},
+    ]
+  },
+  { id:"otros", nombre:"OTROS", initials:"O", color:"av-blue",
+    adeudado:53450, pagado:0,
+    ordenes:[
+      {oc:"OC-1- ALZER",fecha:"09/06/2026",factura:"119",qty:8,subtotal:14000,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
+      {oc:"OC2- ALZER",fecha:"03/06/2026",factura:"113",qty:10,subtotal:17500,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
+      {oc:"OC-1",fecha:"09/06/2026",factura:"493",qty:1,subtotal:590,estado:"ENTREGADO",pago:"SI",fecha_pago:"09/06/2026"},
+      {oc:"OC3-ALZER",fecha:"18/06/2026",factura:"132",qty:12,subtotal:21950,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
     ]
   },
   { id:"roho", nombre:"ROHO", initials:"R", color:"av-yellow",
-    adeudado:143679, pagado:0,
+    adeudado:181549, pagado:0,
     ordenes:[
-      {oc:"260006659",fecha:null,factura:"—",qty:2,subtotal:2177,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
-      {oc:"260006678",fecha:null,factura:"—",qty:23,subtotal:32809,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
-      {oc:"260006680",fecha:null,factura:"—",qty:69,subtotal:108693,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
+      {oc:"260006659",fecha:null,factura:"127",qty:2,subtotal:2177,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
+      {oc:"260006678",fecha:null,factura:"128",qty:23,subtotal:32809,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
+      {oc:"260006680",fecha:null,factura:"129",qty:69,subtotal:108693,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
+      {oc:"OC-T3",fecha:null,factura:"109",qty:1,subtotal:800,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
+      {oc:"OC-T2",fecha:null,factura:"110",qty:1,subtotal:800,estado:"ENTREGADO",pago:"NO",fecha_pago:null},
     ]
   }
 ];
-const TOTAL = 333229.0;
+const TOTAL = 398419.0;
 CLIENTES.forEach(c => {
   const unpaidDates = c.ordenes.filter(o=>o.pago==='NO'&&o.fecha).map(o=>daysSince(o.fecha));
   c.maxDays = unpaidDates.length ? Math.max(...unpaidDates) : null;
